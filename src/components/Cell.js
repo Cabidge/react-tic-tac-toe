@@ -1,7 +1,12 @@
 import "./Cell.css";
 
 function Cell({ status, onClick }) {
-    return <div className="Cell" onClick={onClick}></div>;
+    let className = "Cell";
+    if (status != null) {
+        className += status === 0 ? " red" : " blue";
+    }
+
+    return <div className={className} onClick={onClick}></div>;
 }
 
 export default Cell;
