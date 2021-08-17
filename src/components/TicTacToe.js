@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import CellContainer from "./CellContainer";
 import TurnDisplay from "./TurnDisplay";
+import ResultDisplay from "./ResultDisplay";
 
 function check3(cells, start, step) {
     const val = cells[start];
@@ -81,11 +82,22 @@ function TicTacToe() {
                 winner: newWinner,
             });
         }
+
+        if (newCells.every((cell) => cell !== null)) {
+            dispatch({ isActive: false });
+        }
     }
 
     return (
         <div>
-            <TurnDisplay playerId={playerId} />
+            {isActive ? (
+                <TurnDisplay playerId={playerId} />
+            ) : (
+                <ResultDisplay
+                    winner={winner}
+                    onClickReset={() => dispatch({ type: "reset" })}
+                ></ResultDisplay>
+            )}
             <CellContainer cellStatuses={cells} onCellClick={handleClick} />
         </div>
     );
