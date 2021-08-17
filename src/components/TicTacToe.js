@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import CellContainer from "./CellContainer";
 import TurnDisplay from "./TurnDisplay";
 
@@ -33,11 +33,29 @@ function checkWin(cells) {
     return null;
 }
 
+function initialState() {
+    return {
+        isActive: true,
+        winner: null,
+        cells: Array(9).fill(null),
+        playerId: 0,
+    };
+}
+
+function reducer(state, action) {
+    switch (action.type) {
+        case "reset":
+            return initialState();
+        default:
+            return { ...state, ...action };
+    }
+}
+
 function TicTacToe() {
-    const [isActive, setActive] = useState(true);
-    const [winner, setWinner] = useState(null);
-    const [cells, setCells] = useState(Array(9).fill(null));
-    const [playerId, setPlayerId] = useState(0);
+    const [{ isActive, winner, cells, playerId }, dispatch] = useReducer(
+        reducer,
+        initialState()
+    );
 
     function handleClick(index) {
         // Don't handle click if the game is over
@@ -49,16 +67,19 @@ function TicTacToe() {
         // Set cell at the given index to playerId
         const newCells = [...cells];
         newCells[index] = playerId;
-        setCells(newCells);
 
-        // Swaps playerId from 0 to 1 or vice versa
-        setPlayerId((playerId + 1) % 2);
+        dispatch({
+            cells: newCells,
+            playerId: (playerId + 1) % 2, // Swaps playerId from 0 to 1 or vice versa
+        });
 
         const newWinner = checkWin(newCells);
         if (newWinner != null) {
             console.log(`Player ${winner + 1} is the Winner!`);
-            setWinner(newWinner);
-            setActive(false);
+            dispatch({
+                isActive: false,
+                winner: newWinner,
+            });
         }
     }
 
