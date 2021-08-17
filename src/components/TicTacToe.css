@@ -1,0 +1,18 @@
+.panel {
+    background-color: rgb(240, 255, 254);
+    border-radius: 8px;
+    border: 2px solid rgb(217, 225, 233);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: clamp(300px, 80%, 600px);
+    height: 74px;
+
+    margin: 12px auto;
+
+    font-family: "Arial Narrow", Arial, sans-serif;
+    font-size: larger;
+    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.12);
+}

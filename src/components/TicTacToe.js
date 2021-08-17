@@ -1,4 +1,7 @@
 import { useReducer } from "react";
+
+import "./TicTacToe.css";
+
 import CellContainer from "./CellContainer";
 import TurnDisplay from "./TurnDisplay";
 import ResultDisplay from "./ResultDisplay";
@@ -90,14 +93,16 @@ function TicTacToe() {
 
     return (
         <div>
-            {isActive ? (
-                <TurnDisplay playerId={playerId} />
-            ) : (
-                <ResultDisplay
-                    winner={winner}
-                    onClickReset={() => dispatch({ type: "reset" })}
-                ></ResultDisplay>
-            )}
+            <div className="panel">
+                {isActive ? (
+                    <TurnDisplay playerId={playerId} />
+                ) : (
+                    <ResultDisplay
+                        winner={winner}
+                        onClickReset={() => dispatch({ type: "reset" })}
+                    ></ResultDisplay>
+                )}
+            </div>
             <CellContainer cellStatuses={cells} onCellClick={handleClick} />
         </div>
     );
