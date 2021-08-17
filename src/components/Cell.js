@@ -1,7 +1,7 @@
 import "./Cell.css";
 
-function Cell({ id, status }) {
-    return <div className="Cell"></div>;
+function Cell({ status, onClick }) {
+    return <div className="Cell" onClick={onClick}></div>;
 }
 
 export default Cell;

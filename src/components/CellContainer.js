@@ -1,11 +1,15 @@
 import Cell from "./Cell";
 import "./CellContainer.css";
 
-function CellContainer(props) {
+function CellContainer({ cellStatuses, onCellClick }) {
     return (
         <div className="CellContainer">
-            {props.cellStatuses.map((status, index) => (
-                <Cell key={index} id={index} status={status} />
+            {cellStatuses.map((status, index) => (
+                <Cell
+                    key={index}
+                    status={status}
+                    onClick={(e) => onCellClick(index, e)}
+                />
             ))}
         </div>
     );
