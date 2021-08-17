@@ -1,3 +1,5 @@
+import "./ResultDisplay.css";
+
 function ResultDisplay({ winner, onClickReset }) {
     const message =
         winner == null ? "It's a Tie!" : `Player ${winner + 1} Wins!`;
@@ -5,7 +7,9 @@ function ResultDisplay({ winner, onClickReset }) {
     return (
         <span className="ResultDisplay">
             {message}
-            <button onClick={onClickReset}>Rematch?</button>
+            <button className="reset" onClick={onClickReset}>
+                ↻
+            </button>
         </span>
     );
 }
