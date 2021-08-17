@@ -1,0 +1,9 @@
+.CellContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    width: clamp(300px, 80%, 600px);
+
+    margin: 0 auto;
+}
