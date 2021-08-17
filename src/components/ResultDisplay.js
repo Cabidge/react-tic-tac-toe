@@ -3,10 +3,10 @@ function ResultDisplay({ winner, onClickReset }) {
         winner == null ? "It's a Tie!" : `Player ${winner + 1} Wins!`;
 
     return (
-        <div className="ResultDisplay">
+        <span className="ResultDisplay">
             {message}
             <button onClick={onClickReset}>Rematch?</button>
-        </div>
+        </span>
     );
 }
 
