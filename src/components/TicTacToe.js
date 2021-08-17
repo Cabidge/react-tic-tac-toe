@@ -12,6 +12,7 @@ function check3(cells, start, step) {
     return true;
 }
 
+// Not the most optimized but good enough for a shitty tic tac toe
 function checkWin(cells) {
     // Check columns
     for (let start = 0; start < 3; start++) {
@@ -33,10 +34,15 @@ function checkWin(cells) {
 }
 
 function TicTacToe() {
+    const [isActive, setActive] = useState(true);
+    const [winner, setWinner] = useState(null);
     const [cells, setCells] = useState(Array(9).fill(null));
     const [playerId, setPlayerId] = useState(0);
 
     function handleClick(index) {
+        // Don't handle click if the game is over
+        if (!isActive) return;
+
         // Prevent already colored cells from being updated
         if (cells[index] != null) return;
 
@@ -48,9 +54,11 @@ function TicTacToe() {
         // Swaps playerId from 0 to 1 or vice versa
         setPlayerId((playerId + 1) % 2);
 
-        const winner = checkWin(newCells);
-        if (winner != null) {
+        const newWinner = checkWin(newCells);
+        if (newWinner != null) {
             console.log(`Player ${winner + 1} is the Winner!`);
+            setWinner(newWinner);
+            setActive(false);
         }
     }
 
